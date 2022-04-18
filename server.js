@@ -1,5 +1,4 @@
 const express = require('express')
-const client = require('./dbconnection')
 const method = require('./src/controller')
 const bodyParser = require("body-parser")
 const app = express()
@@ -12,7 +11,7 @@ app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`)
 })
 
-client.connect()
+
 
 app.get("/", (req, res) => {
     res.send('API READY')
