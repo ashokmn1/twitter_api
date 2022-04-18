@@ -1,15 +1,10 @@
-const {Pool} = require('pg')
+const prodConnection = require("./prodConnection");
+const devConnection = require("./devConnection");
 
-const pool = new Pool ({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'postgres',
-    password: 'Ashokmn@123',
-    port: 5432,
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
-})
-
-module.exports = pool;
+if (process.env.NODE_ENV === "production") {
+  // for production
+  module.exports = prodConnection;
+} else {
+  //for devlopment mode;
+  module.exports = devConnection;
+}
