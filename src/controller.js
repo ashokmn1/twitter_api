@@ -145,7 +145,7 @@ const addCommentsByTweetId = (req, res) => {
             console.log(error)
             res.send(error.message)
         } else {
-            res.status(201).send("Added Sucessfully")
+            res.status(201).send("Added Sucessfully",text)
         }
     })
 
