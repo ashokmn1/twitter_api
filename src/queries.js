@@ -9,7 +9,7 @@ const deleteTweetsById = 'DELETE FROM tweets WHERE id = $1'
 const getTweetById = 'SELECT *  FROM tweets WHERE id = $1'
 const getTweetByUserId = 'SELECT * FROM tweets WHERE user_id = $1'
 const getCommentBYTweetId = 'SELECT * FROM comments WHERE tweet_id = $1'
-const addCommentsByTweetId = 'INSERT INTO comments (user_id,tweet_id,text) VALUES ($1,$2,$3)'
+const addCommentsByTweetId = 'INSERT INTO comments (user_id,tweet_id,text) VALUES ($1,$2,$3) RETURNING *'
 const deleteCommentsById = 'DELETE FROM comments WHERE id = $1'
 
 module.exports = {
