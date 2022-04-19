@@ -25,7 +25,7 @@ const getUserById = (req, res) => {
 }
 
 const addUser = (req, res) => {
-    const { name, email, password } = req.body
+    const { name, email, password, uname, bio } = req.body
 
     // check if email exists
     pool.query(queries.checkEmailExists, [email], (error, results) => {
@@ -34,7 +34,7 @@ const addUser = (req, res) => {
         }
 
         // add user to db
-        pool.query(queries.addUser, [name, email, password], (error, results) => {
+        pool.query(queries.addUser, [name, email, password, uname, bio], (error, results) => {
             if (error) {
                 console.log(error)
                 res.status(404)
@@ -140,7 +140,7 @@ const getCommentBYTweetId = (req, res) => {
 const addCommentsByTweetId = (req, res) => {
     const { user_id, tweet_id, text } = req.body
 
-    pool.query(queries.addCommentsByTweetId, [user_id,tweet_id, text], (error, results) => {
+    pool.query(queries.addCommentsByTweetId, [user_id, tweet_id, text], (error, results) => {
         if (error) {
             console.log(error)
             res.send(error.message)

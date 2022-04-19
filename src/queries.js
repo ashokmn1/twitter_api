@@ -1,7 +1,7 @@
 const getUsers = 'SELECT * FROM user_details'
 const getUserById = 'SELECT *  FROM user_details WHERE id = $1'
 const checkEmailExists = 'SELECT s FROM user_details s WHERE s.email = $1'
-const addUser = 'INSERT INTO user_details (name,email,password) VALUES ($1,$2,$3)'
+const addUser = 'INSERT INTO user_details (name,email,password,uname,bio) VALUES ($1,$2,$3,$4,$5)'
 const removeUser = 'DELETE FROM user_details WHERE id = $1'
 const getAllTweets = 'SELECT * FROM tweets'
 const addTweets = 'INSERT INTO tweets (user_id,content,discription) VALUES ($1,$2,$3)'
