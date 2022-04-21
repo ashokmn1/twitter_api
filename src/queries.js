@@ -11,6 +11,8 @@ const getTweetByUserId = 'SELECT * FROM tweets WHERE user_id = $1'
 const getCommentBYTweetId = 'SELECT * FROM comments WHERE tweet_id = $1'
 const addCommentsByTweetId = 'INSERT INTO comments (user_id,tweet_id,text) VALUES ($1,$2,$3) RETURNING *'
 const deleteCommentsById = 'DELETE FROM comments WHERE id = $1'
+const updateUser = 'UPDATE user_details SET active=$2 WHERE id=$1'
+const getUserByState = 'SELECT *  FROM user_details WHERE active = $1 '
 
 module.exports = {
     getUsers,
@@ -25,5 +27,7 @@ module.exports = {
     getTweetByUserId,
     getCommentBYTweetId,
     addCommentsByTweetId,
-    deleteCommentsById
+    deleteCommentsById,
+    updateUser,
+    getUserByState
 }

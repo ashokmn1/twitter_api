@@ -25,7 +25,7 @@ const getUserById = (req, res) => {
 }
 
 const addUser = (req, res) => {
-    const { avatar, name, email, password, uname, bio } = req.body
+    const { name, email, password, uname, bio } = req.body
 
     // check if email exists
     pool.query(queries.checkEmailExists, [email], (error, results) => {
@@ -34,7 +34,7 @@ const addUser = (req, res) => {
         }
 
         // add user to db
-        pool.query(queries.addUser, [avatar, name, email, password, uname, bio], (error, results) => {
+        pool.query(queries.addUser, [name, email, password, uname, bio], (error, results) => {
             if (error) {
                 console.log(error)
                 res.status(404)
@@ -42,6 +42,39 @@ const addUser = (req, res) => {
                 res.status(201).send("Added Sucessfully")
             }
         })
+    })
+}
+
+const updateUser = (req, res) => {
+    const id = parseInt(req.params.id)
+    const { active } = req.body
+
+    pool.query(queries.getUserById, [id], (error, results) => {
+        const noUserFound = !results.rows.length
+        if (noUserFound) {
+            res.send("user not exist please sign up")
+        }
+
+        pool.query(queries.updateUser, [id,active], (error, results) => {
+            if (error) {
+                console.log(error)
+                res.status(404)
+            } else {
+                res.status(200).send("User updated successfully")
+            }
+        })
+    })
+}
+
+const getUserByState = (req, res) => {
+    const active = parseInt(req.params.active)
+    pool.query(queries.getUserByState, [active], (error, results) => {
+        if (error) {
+            console.log(error)
+            res.send(error.message)
+        } else {
+            res.status(200).json(results.rows)
+        }
     })
 }
 
@@ -168,6 +201,7 @@ module.exports = {
     getUserById,
     addUser,
     removeUser,
+    updateUser,
     getAllTweets,
     addTweets,
     deleteTweetsById,
@@ -175,5 +209,6 @@ module.exports = {
     getTweetByUserId,
     getCommentBYTweetId,
     addCommentsByTweetId,
-    deleteCommentsById
+    deleteCommentsById,
+    getUserByState
 }
