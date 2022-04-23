@@ -171,9 +171,9 @@ const getCommentBYTweetId = (req, res) => {
 }
 
 const addCommentsByTweetId = (req, res) => {
-    const { user_id, tweet_id, text } = req.body
+    const { tweet_id, text } = req.body
 
-    pool.query(queries.addCommentsByTweetId, [user_id, tweet_id, text], (error, results) => {
+    pool.query(queries.addCommentsByTweetId, [tweet_id, text], (error, results) => {
         if (error) {
             console.log(error)
             res.send(error.message)
